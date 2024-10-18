@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ship Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+      }
+
+      /* Center the title */
+      h1 {
+        text-align: center;
+        margin: 20px 0;
+        color: #333;
+      }
+      .flex {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+      .left {
+        width: 30%;
+      }
+      /* Set map dimensions */
+      #map {
+        height: 300px;
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid #ccc;
+        margin-right: 20px;
+      }
+
+      /* Container for coordinates and datetime info */
+      .info-container {
+        background-color: #f9ffde;
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        padding: 10px;
+      }
+
+      /* Styles for the displayed lat, lng, and datetime */
+      .info-item {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #444;
+      }
+
+      .info-label {
+        font-weight: bold;
+        color: #333;
+      }
+      iframe {
+        width: 400px;
+        aspect-ratio: 16 / 9;
+      }
+      #graphCanvas {
+        width: 500px;
+        height: 500px;
+        background-color: white;
+      }
+      @media (max-width: 678px) {
+        .flex {
+          flex-direction: column;
+        }
+        .left {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>VelocyCruisher | UPN Veteran Yogyakarta</h1>
+    <div class="flex">
+      <div class="left">
+        <div id="map"></div>
+        <!-- Info Section for Lat, Lng, and Datetime -->
+        <div class="info-container">
+          <div class="info-item">
+            <span class="info-label">Latitude:</span>
+            <span id="latitude">N/A</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Longitude:</span>
+            <span id="longitude">N/A</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Speed Over Ground:</span>
+            <span id="Speed">N/A</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Course Over Ground:</span>
+            <span id="cog">N/A</span>
+          </div>
+        </div>
+        <div>
+          <input type="radio" name="lintasan" id="lintasanA" value="a" />
+          <label for="lintasanA">Lint. A</label>
+          <input type="radio" name="lintasan" id="lintasanB" value="b" />
+          <label for="lintasanB">Lint. B</label>
+        </div>
+      </div>
+      <canvas id="graphCanvas" width="500" height="500"> </canvas>
+
+      <div class="webcam">
+        <div class="video-container">
+          <iframe src="" frameborder="1"></iframe>
+        </div>
+        <div class="video-container">
+          <iframe src="" frameborder="1"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+    <script type="module" src="firebase.js"></script>
+  </body>
+</html>

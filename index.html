@@ -56,9 +56,29 @@
         font-weight: bold;
         color: #333;
       }
-      iframe {
-        width: 400px;
-        aspect-ratio: 16 / 9;
+      .video-container {
+        width: 500px;
+        height: 281px; /* 16:9 aspect ratio */
+        object-fit: cover; /* Keeps the image fitting within the container */
+        background-color: lightgray; /* Optional placeholder background */
+        border: 1px solid black;
+        overflow: hidden; /* Hide overflow */
+        position: relative; /
+      }
+      .video-container img {
+        position: absolute; /* Position absolute to allow for full coverage */
+        top: 50%; /* Center vertically */
+        left: 50%; /* Center horizontally */
+        width: auto; /* Allow width to scale automatically */
+        height: auto; /* Allow height to scale automatically */
+        max-width: 100%; /* Ensure image covers container */
+        max-height: 100%; /* Ensure image covers container */
+        transform: translate(-50%, -50%); /* Center the image */
+        object-fit: cover; /* Cover the container without distortion */
+      }
+
+      .video-container img:empty {
+        content: "";
       }
       #graphCanvas {
         width: 500px;
@@ -110,10 +130,10 @@
 
       <div class="webcam">
         <div class="video-container">
-          <iframe src="" frameborder="1"></iframe>
+          <img src="#" alt="Waiting for Image Overwater" id="img-overwater" />
         </div>
         <div class="video-container">
-          <iframe src="" frameborder="1"></iframe>
+          <img src="#" alt="Waiting for Image Underwater" id="img-underwater" />
         </div>
       </div>
     </div>

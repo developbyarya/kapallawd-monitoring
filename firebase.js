@@ -5,6 +5,7 @@ import {
   getFirestore,
   getDocs,
   collection,
+  onSnapshot,
   query,
   orderBy,
   limit,
@@ -29,7 +30,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const gpsRef = collection(db, "gps");
-addTrajectory();
 
 function addTrajectory() {
   const docs = getDocs(collection(db, "gps"));
@@ -53,18 +53,24 @@ function addTrajectory() {
 
 async function updateRecentLoc() {
   const q = query(gpsRef, orderBy("timestamp", "desc"), limit(2));
-  const data = await getDocs(q);
-  let result = [];
-  data.forEach((doc) => {
-    result.push(doc.data());
+
+  const unsubscribe = onSnapshot(q, (data) => {
+    let result = [];
+    data.forEach((doc) => {
+      console.log(doc.data());
+      result.push(doc.data());
+    });
+    updateLocData(
+      result[1].loc._lat,
+      result[1].loc._long,
+      result[0].loc._lat,
+      result[0].loc._long,
+      result[0].speed
+    );
+    addTrajectory();
   });
-  updateLocData(
-    result[1].loc._lat,
-    result[1].loc._long,
-    result[0].loc._lat,
-    result[0].loc._long,
-    result[0].speed
-  );
+
+  // const data = await getDocs(q);
 }
 
 updateRecentLoc();

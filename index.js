@@ -14,7 +14,7 @@ const firebaseConfig = {
   messagingSenderId: "383307595328",
   appId: "1:383307595328:web:e3cf259d7c707e9de629a5",
 };
-import { getStorage, ref, listAll } from "firebase/storage";
+import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -45,14 +45,14 @@ web.get("/gambar-misi", async (req, res) => {
       const recentFileRef = sortedItems[sortedItems.length - 1]; // Assuming the last item is the most recent
 
       // Get the download URL for the most recent file
-      const url = await recentFileRef.getDownloadURL();
+      const url = await getDownloadURL(recentFileRef);
 
       return url;
     }
 
     // Get the recent images from both folders
-    const overwaterImageUrl = await getMostRecentImageUrl("overwater");
-    const underwaterImageUrl = await getMostRecentImageUrl("underwater");
+    const overwaterImageUrl = await getMostRecentImageUrl("Atas");
+    const underwaterImageUrl = await getMostRecentImageUrl("Bawah");
 
     // Construct the response
     const response = {

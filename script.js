@@ -12,6 +12,26 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "© OpenStreetMap",
 }).addTo(map);
 
+function updateImageMission() {
+  setInterval(async () => {
+    try {
+      const response = await fetch("/gambar-misi");
+      const data = await response.json();
+
+      // Set the src attributes of the images
+      if (data.overwater) {
+        document.getElementById("img-overwater").src = data.overwater;
+      }
+
+      if (data.underwater) {
+        document.getElementById("img-underwater").src = data.underwater;
+      }
+    } catch (error) {
+      console.error("Error loading images:", error);
+    }
+  }, 2000);
+}
+
 // Create a marker for the ship's location
 const marker = L.marker([-6.2, 106.816666]).addTo(map); // Initial position
 
@@ -91,3 +111,4 @@ function mesh() {
 }
 
 mesh();
+updateImageMission();

@@ -1,5 +1,5 @@
 // Initialize the map
-const map = L.map("map").setView([-6.2, 106.816666], 13); // Default location to Jakarta
+const map = L.map("map").setView([-6.2, 106.816666], 50); // Default location to Jakarta
 const lintasan = "a";
 const latDom = document.querySelector("#latitude");
 const lngDom = document.querySelector("#longitude");
@@ -79,7 +79,7 @@ function cor_to_px(lat1, lng1, lat2, lng2) {
 
 const canvas = document.getElementById("graphCanvas");
 const ctx = canvas.getContext("2d");
-const points = [[70, 450]];
+const points = [[500 - 70, 450]];
 
 function addNewPoint(xOffset, yOffset) {
   points.push([

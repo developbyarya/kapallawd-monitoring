@@ -53,6 +53,7 @@ function addTrajectory() {
 
 async function updateRecentLoc() {
   const q = query(gpsRef, orderBy("timestamp", "desc"), limit(2));
+  addTrajectory();
 
   const unsubscribe = onSnapshot(q, (data) => {
     let result = [];
